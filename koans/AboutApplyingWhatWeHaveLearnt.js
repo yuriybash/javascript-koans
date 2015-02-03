@@ -38,14 +38,25 @@ describe("About Applying What We Have Learnt", function() {
   it("given I'm allergic to nuts and hate mushrooms, it should find a pizza I can eat (functional)", function () {
 
       var productsICanEat = [];
+      
 
       productsICanEat = _(products).filter(function(x){
 
-          return x["containsNuts"] == false && _(x["ingredients"].any(function(x){return x == "mushrooms"}) == false)
+          
+          return x["containsNuts"] == false && !_(x["ingredients"]).any(containsMushrooms)
+          
+
+
+          function containsMushrooms(input){
+            return input == 'mushrooms';
+          }
+          //console.log(_(x["ingredients"].any(function(y){return y == "mushrooms"}) == false));
 
 
       })
-      
+
+
+      console.log(productsICanEat);
       /* solve using filter() & all() / any() */
 
       expect(productsICanEat.length).toBe(1);
