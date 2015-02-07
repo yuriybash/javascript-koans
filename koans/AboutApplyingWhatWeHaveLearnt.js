@@ -108,9 +108,14 @@ describe("About Applying What We Have Learnt", function() {
   it("should count the ingredient occurrence (functional)", function () {
     var ingredientCount = { "{ingredient name}": 0 };
 
-    console.log(_.flatten(_(products).map(function(a){
+    var ingredientFrequencyFlatArray = ((_.flatten(_(products).map(function(a){
         return a["ingredients"]
-    })));
+    }))));
+
+    console.log(_.reduce(ingredientFrequencyFlatArray, function(a, b){
+        ingredientCount[b] = (ingredientCount[b] || 0) + 1;
+        return ingredientCount;
+    }, ingredientCount));
 
 
 
@@ -128,7 +133,7 @@ describe("About Applying What We Have Learnt", function() {
 
 
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   /*********************************************************************************/
